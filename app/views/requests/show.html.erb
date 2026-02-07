@@ -1,0 +1,37 @@
+<% content_for(:title) { "Request Confirmed" } %>
+
+<div class="container">
+  <div class="confirmation">
+    <div class="confirmation-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M8 12.5l2.5 2.5 5.5-5.5" />
+      </svg>
+    </div>
+
+    <h1 class="confirmation-title">Your request is saved!</h1>
+    <p class="confirmation-message">
+      Expect us on <strong><%= @request.pick_up_at&.strftime("%B %-d, %Y") || "the scheduled pick up date" %></strong>
+      between 18:00 and 20:30.
+    </p>
+
+    <div class="confirmation-details">
+      <dl>
+        <dt>Request ID</dt>
+        <dd><strong><%= @request.customer_id %></strong></dd>
+        <% if @request.name.present? %>
+          <dt>Name</dt>
+          <dd><%= @request.name %></dd>
+        <% end %>
+        <dt>Phone</dt>
+        <dd><%= @request.phone %></dd>
+        <dt>Address</dt>
+        <dd><%= [@request.address_line_1, @request.address_line_2, @request.city].compact_blank.join(", ") %></dd>
+      </dl>
+    </div>
+
+    <div class="confirmation-actions">
+      <%= link_to "Submit another request", new_request_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+</div>

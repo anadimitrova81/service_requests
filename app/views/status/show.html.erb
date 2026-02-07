@@ -1,0 +1,49 @@
+<% content_for(:title) { "Check Request Status" } %>
+
+<div class="container">
+  <header class="page-header">
+    <h1>Check Your Request</h1>
+    <p class="page-subtitle">Enter your phone number or request ID to look up your request status.</p>
+  </header>
+
+  <div class="status-lookup">
+    <%= form_with url: status_path, method: :get, class: "status-form" do |form| %>
+      <div class="status-search">
+        <%= form.text_field :query, value: @query, class: "form-control", placeholder: "Phone number or Request ID", skip_group: true %>
+        <%= form.submit "Check Status", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+
+    <% if @query.present? %>
+      <% if @requests.any? %>
+        <div class="status-results">
+          <% @requests.each do |req| %>
+            <div class="status-card">
+              <div class="status-card-header">
+                <span class="status-badge status-<%= req.status %>"><%= req.status.humanize %></span>
+                <time class="status-date"><%= req.created_at.strftime("%B %-d, %Y") %></time>
+              </div>
+              <div class="status-card-body">
+                <dl>
+                  <dt>Request ID</dt>
+                  <dd><strong><%= req.customer_id %></strong></dd>
+                  <dt>Address</dt>
+                  <dd><%= [req.address_line_1, req.address_line_2, req.city].compact_blank.join(", ") %></dd>
+                  <% if req.pick_up_at.present? %>
+                    <dt>Pick Up</dt>
+                    <dd><%= req.pick_up_at.strftime("%B %-d, %Y") %></dd>
+                  <% end %>
+                </dl>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="status-empty">
+          <p>No requests found for <strong><%= @query %></strong>.</p>
+          <p>Please check the number and try again, or <%= link_to "submit a new request", new_request_path %>.</p>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

@@ -24,6 +24,30 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header class="site-header">
+      <div class="header-container">
+        <a href="<%= root_path %>" class="site-logo">Service Requests</a>
+        <nav class="site-nav">
+          <ul>
+            <li><%= link_to "New Request", new_request_path %></li>
+            <li><%= link_to "Check Your Request", status_path %></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <% if notice.present? %>
+        <div class="container">
+          <div class="flash flash-notice"><%= notice %></div>
+        </div>
+      <% end %>
+      <% if alert.present? %>
+        <div class="container">
+          <div class="flash flash-alert"><%= alert %></div>
+        </div>
+      <% end %>
+      <%= yield %>
+    </main>
   </body>
 </html>
