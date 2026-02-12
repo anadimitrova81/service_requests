@@ -5,14 +5,29 @@ class Request < ApplicationRecord
 
   before_create :generate_customer_id
 
-  validates :name, :phone, :address_line_1, :pick_up_at, presence: true
+  validates :name, :phone, :email, :address_line_1, :pick_up_at, presence: true
   validates :customer_id, uniqueness: true, allow_nil: true
   validates :phone, format: { with: BULGARIAN_PHONE_REGEX,
                               message: "must be a valid Bulgarian phone number (e.g. +359881234567 or 0881234567)" },
                     allow_blank: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_blank: true
 
+  SAME_DAY_CUTOFF_HOUR = 16
+  validate :pick_up_at_not_in_the_past, if: -> { pick_up_at.present? }
+
+  class << self
+    def earliest_pick_up_date
+      Time.current.hour < SAME_DAY_CUTOFF_HOUR ? Date.current : Date.tomorrow
+    end
+  end
+
   private
+
+  def pick_up_at_not_in_the_past
+    if pick_up_at.to_date < earliest_pick_up_date
+      errors.add(:pick_up_at, "must be #{earliest_pick_up_date == Date.current ? 'today' : 'tomorrow'} or later")
+    end
+  end
 
   def generate_customer_id
     today = Date.current

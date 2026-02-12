@@ -3,13 +3,13 @@
 <div class="container">
   <header class="page-header">
     <h1>Check Your Request</h1>
-    <p class="page-subtitle">Enter your phone number or request ID to look up your request status.</p>
+    <p class="page-subtitle">Enter your phone number, email, or request ID to look up your request status.</p>
   </header>
 
   <div class="status-lookup">
     <%= form_with url: status_path, method: :get, class: "status-form" do |form| %>
       <div class="status-search">
-        <%= form.text_field :query, value: @query, class: "form-control", placeholder: "Phone number or Request ID", skip_group: true %>
+        <%= form.text_field :query, value: @query, class: "form-control", placeholder: "Phone, email, or Request ID", skip_group: true %>
         <%= form.submit "Check Status", class: "btn btn-primary" %>
       </div>
     <% end %>

@@ -15,7 +15,7 @@
 
   <fieldset>
     <legend>Schedule</legend>
-    <%= form.date_field :pick_up_at, label: "Pick Up Date", onclick: "this.showPicker()" %>
+    <%= form.date_field :pick_up_at, label: "Pick Up Date", min: Request.earliest_pick_up_date, onclick: "this.showPicker()" %>
     <div class="form-notice">
       <strong>Good news:</strong> Pick up is scheduled between 18:00 and 20:30, after normal working hours, so you don't have to worry about being home during the day.
     </div>
