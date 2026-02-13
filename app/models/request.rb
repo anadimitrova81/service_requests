@@ -24,8 +24,9 @@ class Request < ApplicationRecord
   private
 
   def pick_up_at_not_in_the_past
-    if pick_up_at.to_date < earliest_pick_up_date
-      errors.add(:pick_up_at, "must be #{earliest_pick_up_date == Date.current ? 'today' : 'tomorrow'} or later")
+    earliest = self.class.earliest_pick_up_date
+    if pick_up_at.to_date < earliest
+      errors.add(:pick_up_at, "must be #{earliest == Date.current ? 'today' : 'tomorrow'} or later")
     end
   end
 

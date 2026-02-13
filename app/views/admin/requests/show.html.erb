@@ -1,0 +1,46 @@
+<% content_for(:title) { "Request #{@request.customer_id}" } %>
+
+<div class="container container-wide">
+  <header class="page-header">
+    <h1>Request <%= @request.customer_id %></h1>
+  </header>
+
+  <div class="request-detail">
+    <div class="request-detail-header">
+      <span class="status-badge status-<%= @request.status %>"><%= @request.status.humanize %></span>
+    </div>
+
+    <dl class="detail-list">
+      <dt>Request ID</dt>
+      <dd><%= @request.customer_id %></dd>
+
+      <% if @request.name.present? %>
+        <dt>Name</dt>
+        <dd><%= @request.name %></dd>
+      <% end %>
+
+      <dt>Phone</dt>
+      <dd><%= @request.phone %></dd>
+
+      <% if @request.email.present? %>
+        <dt>Email</dt>
+        <dd><%= @request.email %></dd>
+      <% end %>
+
+      <dt>Address</dt>
+      <dd><%= [@request.address_line_1, @request.address_line_2, @request.city].compact_blank.join(", ") %></dd>
+
+      <% if @request.pick_up_at.present? %>
+        <dt>Pick Up</dt>
+        <dd><%= @request.pick_up_at.strftime("%B %-d, %Y") %></dd>
+      <% end %>
+
+      <dt>Created</dt>
+      <dd><%= @request.created_at.strftime("%B %-d, %Y at %H:%M") %></dd>
+    </dl>
+  </div>
+
+  <div class="actions-footer">
+    <%= link_to "Back to requests", admin_requests_path, class: "btn btn-secondary" %>
+  </div>
+</div>

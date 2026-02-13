@@ -30,7 +30,13 @@
         <nav class="site-nav">
           <ul>
             <li><%= link_to "New Request", new_request_path %></li>
-            <li><%= link_to "Check Your Request", status_path %></li>
+            <li><%= link_to admin_logged_in? ? "Check Request" : "Check Your Request", status_path %></li>
+            <% if admin_logged_in? %>
+              <li><%= link_to "All Requests", admin_requests_path %></li>
+              <li><%= link_to "Log out", logout_path, data: { turbo_method: :delete }, class: "nav-logout" %></li>
+            <% else %>
+              <li><%= link_to "Admin", login_path %></li>
+            <% end %>
           </ul>
         </nav>
       </div>
@@ -38,13 +44,19 @@
 
     <main>
       <% if notice.present? %>
-        <div class="container">
-          <div class="flash flash-notice"><%= notice %></div>
+        <div class="flash-container <%= 'container-wide' if admin_logged_in? %>">
+          <div class="flash flash-notice flash-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <span><%= notice %></span>
+          </div>
         </div>
       <% end %>
       <% if alert.present? %>
-        <div class="container">
-          <div class="flash flash-alert"><%= alert %></div>
+        <div class="flash-container <%= 'container-wide' if admin_logged_in? %>">
+          <div class="flash flash-alert flash-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span><%= alert %></span>
+          </div>
         </div>
       <% end %>
       <%= yield %>

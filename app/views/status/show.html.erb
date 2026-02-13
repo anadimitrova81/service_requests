@@ -14,7 +14,11 @@
       </div>
     <% end %>
 
-    <% if @query.present? %>
+    <% if @error.present? %>
+      <div class="status-error">
+        <p><%= @error %></p>
+      </div>
+    <% elsif @query.present? %>
       <% if @requests.any? %>
         <div class="status-results">
           <% @requests.each do |req| %>

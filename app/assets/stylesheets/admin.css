@@ -1,0 +1,82 @@
+/* Admin Requests Table */
+.requests-table-wrapper {
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow-x: auto;
+}
+
+.requests-table { width: 100%; border-collapse: collapse; }
+.requests-table thead { background-color: var(--color-background); border-bottom: 2px solid var(--color-border); }
+
+.requests-table th {
+  padding: 14px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-text-muted);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.requests-table td {
+  padding: 14px 16px;
+  font-size: 14px;
+  color: var(--color-text);
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: middle;
+}
+
+.requests-table tbody tr:last-child td { border-bottom: none; }
+.requests-table tbody tr:hover { background-color: var(--color-background); }
+.requests-table td:last-child { text-align: right; }
+.requests-table th:last-child { text-align: right; }
+
+.btn-link { color: var(--color-primary); text-decoration: none; font-weight: 500; font-size: 14px; }
+.btn-link:hover { text-decoration: underline; }
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 48px 32px;
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  color: var(--color-text-muted);
+}
+
+.empty-state p { margin: 0 0 16px 0; }
+
+/* Request Detail */
+.request-detail {
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.request-detail-header {
+  padding: 16px 24px;
+  background-color: var(--color-background);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.detail-list {
+  margin: 0;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 12px 24px;
+  align-items: baseline;
+}
+
+.detail-list dt {
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detail-list dd { margin: 0; font-size: 15px; color: var(--color-text); }

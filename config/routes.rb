@@ -15,4 +15,12 @@ Rails.application.routes.draw do
   resources :requests, only: %i[new create show]
 
   get "status", to: "status#show", as: :status
+
+  get "login", to: "sessions#new"
+  post "login", to: "sessions#create"
+  delete "logout", to: "sessions#destroy", as: :logout
+
+  namespace :admin do
+    resources :requests, only: %i[index show]
+  end
 end

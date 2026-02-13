@@ -27,8 +27,7 @@ class RequestsController < ApplicationController
       :city,
       :address_line_1,
       :address_line_2,
-      :pick_up_at,
-      :delivery_at
+      :pick_up_at
     )
   end
 end
