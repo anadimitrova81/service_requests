@@ -13,7 +13,7 @@
   <% end %>
 
   <div class="request-form">
-    <%= form_with model: [:admin, @user] do |form| %>
+    <%= form_with model: [:admin, @user], url: admin_users_path do |form| %>
       <%= form.email_field :email, label: "Email" %>
       <%= form.password_field :password, label: "Password" %>
       <%= form.password_field :password_confirmation, label: "Password Confirmation" %>

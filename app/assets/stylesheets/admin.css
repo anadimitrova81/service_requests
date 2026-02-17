@@ -35,6 +35,8 @@
 
 .btn-link { color: var(--color-primary); text-decoration: none; font-weight: 500; font-size: 14px; }
 .btn-link:hover { text-decoration: underline; }
+.btn-link-danger { color: var(--color-danger); }
+.btn-link-danger:hover { color: #dc2626; }
 
 /* Empty State */
 .empty-state {
@@ -101,3 +103,16 @@
 .role-admin { background-color: #fef2f2; color: #991b1b; border-color: #fecaca; }
 .role-courier { background-color: #eff6ff; color: #1e40af; border-color: #93c5fd; }
 .role-operator { background-color: #ecfdf5; color: #065f46; border-color: #a7f3d0; }
+
+.user-role-icon { margin-right: 6px; }
+
+/* Inline Role Select */
+.inline-role-select {
+  padding: 4px 8px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background-color: var(--color-surface);
+  cursor: pointer;
+}

@@ -29,13 +29,13 @@
         <a href="<%= root_path %>" class="site-logo">Service Requests</a>
         <nav class="site-nav">
           <ul>
-            <li><%= link_to "New Request", new_request_path %></li>
-            <li><%= link_to admin_logged_in? ? "Check Request" : "Check Your Request", status_path %></li>
+          <li><%= link_to "New Request", new_request_path %></li>
             <% if admin_logged_in? %>
               <li><%= link_to "All Requests", admin_requests_path %></li>
               <li><%= link_to "Users", admin_users_path %></li>
               <li><%= link_to "Log out", logout_path, data: { turbo_method: :delete }, class: "nav-logout" %></li>
             <% else %>
+              <li><%= link_to "Check Your Request", status_path %></li>
               <li><%= link_to "Admin", login_path %></li>
             <% end %>
           </ul>

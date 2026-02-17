@@ -14,14 +14,24 @@
             <th>Email</th>
             <th>Role</th>
             <th>Created</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           <% @users.each do |user| %>
             <tr>
-              <td><%= user.email %></td>
-              <td><span class="role-badge role-<%= user.role %>"><%= user.role.capitalize %></span></td>
+              <td><span class="user-role-icon"><%= User::ROLE_ICONS[user.role] %></span> <%= user.email %></td>
+              <td>
+                <%= form_with model: [:admin, user], url: admin_user_path(user), method: :patch do |form| %>
+                  <%= form.select :role, User::ROLES.map { |r| [r.capitalize, r] }, { skip_group: true }, { class: "inline-role-select", onchange: "this.form.requestSubmit()" } %>
+                <% end %>
+              </td>
               <td><%= user.created_at.strftime("%B %-d, %Y") %></td>
+              <td>
+                <% unless user == current_admin %>
+                  <%= link_to "Delete", admin_user_path(user), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete #{user.email}?" }, class: "btn-link btn-link-danger" %>
+                <% end %>
+              </td>
             </tr>
           <% end %>
         </tbody>

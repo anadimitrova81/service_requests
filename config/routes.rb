@@ -22,6 +22,6 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :requests, only: %i[index show]
-    resources :users, only: %i[index new create]
+    resources :users, only: %i[index new create update destroy]
   end
 end

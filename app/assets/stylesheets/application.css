@@ -337,3 +337,19 @@ input[type="date"].form-control { cursor: pointer; font-family: inherit; }
 
 /* Nav Logout */
 .site-nav a.nav-logout:hover { color: var(--color-danger); }
+
+/* Confirm Dialog */
+.confirm-dialog {
+  border: none;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: 0;
+  max-width: 400px;
+  width: 90%;
+}
+
+.confirm-dialog::backdrop { background-color: rgba(0, 0, 0, 0.4); }
+
+.confirm-dialog-content { padding: 24px; }
+.confirm-dialog-content p { margin: 0 0 20px 0; font-size: 16px; color: var(--color-text); line-height: 1.5; }
+.confirm-dialog-actions { display: flex; justify-content: flex-end; gap: 12px; }
