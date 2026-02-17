@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_13_135900) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_17_100000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
   # Custom types defined in this database.
   # Note that some types may not work with other database engines. Be careful if changing database.
   create_enum "requests_status", ["pending", "pickup_confirmed", "picked_up", "in_progress", "ready_for_delivery", "delivery_confirmed", "delivered", "cancelled"]
+  create_enum "user_role", ["admin", "courier", "worker"]
 
   create_table "requests", force: :cascade do |t|
     t.string "address_line_1", null: false
@@ -41,6 +42,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_13_135900) do
     t.datetime "created_at", null: false
     t.string "email", null: false
     t.string "password_digest", null: false
+    t.enum "role", default: "worker", null: false, enum_type: "user_role"
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end

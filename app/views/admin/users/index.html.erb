@@ -1,0 +1,35 @@
+<% content_for(:title) { "Users" } %>
+
+<div class="container container-wide">
+  <header class="page-header page-header-with-action">
+    <h1>Users</h1>
+    <%= link_to "New User", new_admin_user_path, class: "btn btn-primary" %>
+  </header>
+
+  <% if @users.any? %>
+    <div class="requests-table-wrapper">
+      <table class="requests-table">
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Created</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td><%= user.email %></td>
+              <td><span class="role-badge role-<%= user.role %>"><%= user.role.capitalize %></span></td>
+              <td><%= user.created_at.strftime("%B %-d, %Y") %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <div class="empty-state">
+      <p>No users yet.</p>
+    </div>
+  <% end %>
+</div>

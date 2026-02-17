@@ -1,0 +1,28 @@
+<% content_for(:title) { "New User" } %>
+
+<div class="container">
+  <header class="page-header">
+    <h1>New User</h1>
+  </header>
+
+  <% if @user.errors.any? %>
+    <div class="flash flash-alert flash-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span>Please correct the errors below.</span>
+    </div>
+  <% end %>
+
+  <div class="request-form">
+    <%= form_with model: [:admin, @user] do |form| %>
+      <%= form.email_field :email, label: "Email" %>
+      <%= form.password_field :password, label: "Password" %>
+      <%= form.password_field :password_confirmation, label: "Password Confirmation" %>
+      <%= form.select :role, User::ROLES.map { |r| [r.capitalize, r] }, { label: "Role" } %>
+
+      <div class="form-actions">
+        <%= form.submit "Create User", class: "btn btn-primary" %>
+        <%= link_to "Cancel", admin_users_path, class: "btn btn-secondary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

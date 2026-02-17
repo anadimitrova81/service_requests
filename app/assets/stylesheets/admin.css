@@ -80,3 +80,24 @@
 }
 
 .detail-list dd { margin: 0; font-size: 15px; color: var(--color-text); }
+
+/* Page Header with Action */
+.page-header-with-action { display: flex; align-items: center; justify-content: space-between; }
+
+/* Role Badges */
+.role-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-radius: 9999px;
+  background-color: var(--color-background);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+}
+
+.role-admin { background-color: #fef2f2; color: #991b1b; border-color: #fecaca; }
+.role-courier { background-color: #eff6ff; color: #1e40af; border-color: #93c5fd; }
+.role-operator { background-color: #ecfdf5; color: #065f46; border-color: #a7f3d0; }

@@ -144,10 +144,12 @@ input[type="date"].form-control { cursor: pointer; font-family: inherit; }
   padding: 12px 24px;
   font-size: 16px;
   font-weight: 500;
+  line-height: 1.5;
   text-decoration: none;
   border-radius: var(--radius);
   border: none;
   cursor: pointer;
+  box-sizing: border-box;
   transition: background-color 0.15s ease, transform 0.1s ease;
 }
 
@@ -159,7 +161,7 @@ input[type="date"].form-control { cursor: pointer; font-family: inherit; }
 .btn-danger { background-color: var(--color-danger); color: white; }
 .btn-danger:hover { background-color: #dc2626; }
 
-.form-actions { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--color-border); }
+.form-actions { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--color-border); display: flex; gap: 12px; }
 
 .actions-footer { margin-top: 24px; }
 

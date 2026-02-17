@@ -18,6 +18,20 @@ class ApplicationFormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
+  def select(attribute, choices, options = {}, html_options = {}, &block)
+    if options.delete(:skip_group)
+      return super(attribute, choices, options, html_options, &block)
+    end
+
+    label_text = options.delete(:label)
+    hint       = options.delete(:hint)
+
+    html_options[:class] = [ html_options[:class], "form-control" ].compact.join(" ")
+
+    field_html = super(attribute, choices, options, html_options, &block)
+    wrap_field(attribute, field_html, label_text: label_text, hint: hint)
+  end
+
   private
 
   def wrap_field(attribute, field_html, label_text: nil, hint: nil)
