@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   delete "logout", to: "sessions#destroy", as: :logout
 
   namespace :admin do
-    resources :requests, only: %i[index show]
+    resources :requests, only: %i[index show new create edit update]
     resources :users, only: %i[index new create update destroy]
   end
 end

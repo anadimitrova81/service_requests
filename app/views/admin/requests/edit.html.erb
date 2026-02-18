@@ -1,0 +1,45 @@
+<% content_for(:title) { "Edit Request #{@request.customer_id}" } %>
+
+<div class="container">
+  <header class="page-header">
+    <h1>Edit Request <%= @request.customer_id %></h1>
+  </header>
+
+  <% if @request.errors.any? %>
+    <div class="flash flash-alert flash-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span>Please correct the errors below.</span>
+    </div>
+  <% end %>
+
+  <%= form_with(model: @request, url: admin_request_path(@request), scope: :request, class: "request-form") do |form| %>
+    <fieldset>
+      <legend>Status</legend>
+      <%= form.select :status, Request::STATUSES.map { |k, v| [k.humanize, v] }, { label: "Status" } %>
+    </fieldset>
+
+    <fieldset>
+      <legend>Contact Information</legend>
+      <%= form.text_field :name, placeholder: "Full name" %>
+      <%= form.email_field :email, placeholder: "email@example.com" %>
+      <%= form.telephone_field :phone, placeholder: "Phone number" %>
+    </fieldset>
+
+    <fieldset>
+      <legend>Address</legend>
+      <%= form.text_field :address_line_1, label: "Address Line 1", placeholder: "Street address" %>
+      <%= form.text_field :address_line_2, label: "Address Line 2", placeholder: "Apartment, suite, etc. (optional)" %>
+      <%= form.text_field :city, placeholder: "City" %>
+    </fieldset>
+
+    <fieldset>
+      <legend>Schedule</legend>
+      <%= form.date_field :pick_up_at, label: "Pick Up Date", onclick: "this.showPicker()" %>
+    </fieldset>
+
+    <div class="form-actions">
+      <%= form.submit "Update Request", class: "btn btn-primary" %>
+      <%= link_to "Cancel", admin_requests_path, class: "btn btn-secondary" %>
+    </div>
+  <% end %>
+</div>

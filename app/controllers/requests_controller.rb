@@ -1,4 +1,6 @@
 class RequestsController < ApplicationController
+  before_action :redirect_logged_in_users
+
   def new
     @request = Request.new
   end
@@ -18,6 +20,10 @@ class RequestsController < ApplicationController
   end
 
   private
+
+  def redirect_logged_in_users
+    redirect_to admin_requests_path if admin_logged_in?
+  end
 
   def request_params
     params.require(:request).permit(
