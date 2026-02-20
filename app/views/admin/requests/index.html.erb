@@ -1,0 +1,43 @@
+<% content_for(:title) { "All Requests" } %>
+
+<div class="container container-wide">
+  <header class="page-header page-header-with-action">
+    <h1>All Requests</h1>
+    <% if current_admin&.admin? %>
+      <%= link_to "New Request", new_admin_request_path, class: "btn btn-primary" %>
+    <% end %>
+  </header>
+
+  <% if @requests.any? %>
+    <div class="requests-table-wrapper">
+      <table class="requests-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>City</th>
+            <th>Pick Up</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @requests.each do |req| %>
+            <tr class="clickable-row" onclick="window.location='<%= current_admin&.admin? ? edit_admin_request_path(req) : admin_request_path(req) %>'">
+              <td><%= req.customer_id %></td>
+              <td><%= req.name %></td>
+              <td><%= req.phone %></td>
+              <td><%= req.city %></td>
+              <td><%= req.pick_up_at&.strftime("%B %-d, %Y") %></td>
+              <td><span class="status-badge status-<%= req.status %>"><%= req.status.humanize %></span></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <div class="empty-state">
+      <p>No requests yet.</p>
+    </div>
+  <% end %>
+</div>
