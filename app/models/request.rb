@@ -2,7 +2,7 @@ class Request < ApplicationRecord
   before_create :generate_customer_id
 
   STATUSES = %w[pending pickup_confirmed picked_up in_progress ready_for_delivery delivery_confirmed delivered cancelled]
-  BULGARIAN_PHONE_REGEX = /\A(\+359|0)(87|88|89|98|99|43|2)\d{7}\z/
+  BULGARIAN_PHONE_REGEX = /\A(\+359|0)(87|88|89|98|99)\d{7}\z/
   SAME_DAY_CUTOFF_HOUR = 16
 
   validates :name, :phone, :email, :address_line_1, :pick_up_at, presence: true

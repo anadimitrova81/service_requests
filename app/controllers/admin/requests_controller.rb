@@ -1,12 +1,11 @@
 module Admin
   class RequestsController < BaseController
-    before_action :set_request, only: %i[show edit update]
-
     def index
       @requests = scoped_requests.order(created_at: :desc)
     end
 
     def show
+      @request = scoped_requests.find(params[:id])
     end
 
     def new
@@ -24,26 +23,29 @@ module Admin
     end
 
     def edit
+      @request = scoped_requests.find(params[:id])
+      @statuses = Request.statuses_for(current_admin.role)
     end
 
     def update
+      @request = scoped_requests.find(params[:id])
+
       if @request.update(request_params)
         redirect_to admin_requests_path, notice: "Request #{@request.customer_id} updated successfully."
       else
+        @statuses = Request.statuses_for(current_admin.role)
         render :edit, status: :unprocessable_entity
       end
     end
 
     private
 
-    def set_request = @request = scoped_requests.find(params[:id])
     def scoped_requests = Request.where(status: Request.statuses_for(current_admin.role))
 
     def request_params
-      params.require(:request).permit(
-        :name, :email, :phone, :city,
-        :address_line_1, :address_line_2, :pick_up_at, :status
-      )
+      params.
+        require(:request).
+        permit(:name, :email, :phone, :city, :address_line_1, :address_line_2, :pick_up_at, :status)
     end
   end
 end

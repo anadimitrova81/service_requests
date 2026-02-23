@@ -26,14 +26,8 @@ class RequestsController < ApplicationController
   end
 
   def request_params
-    params.require(:request).permit(
-      :name,
-      :email,
-      :phone,
-      :city,
-      :address_line_1,
-      :address_line_2,
-      :pick_up_at
-    )
+    params.
+      require(:request).
+      permit(:name, :email, :phone, :city, :address_line_1, :address_line_2, :pick_up_at)
   end
 end

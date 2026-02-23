@@ -1,7 +1,5 @@
 module Admin
   class UsersController < BaseController
-    before_action :set_user, only: %i[update destroy]
-
     def index
       @users = User.order(:email)
     end
@@ -21,6 +19,8 @@ module Admin
     end
 
     def update
+      @user = User.find(params[:id])
+
       if @user.update(user_params)
         redirect_to admin_users_path, notice: "Role updated for #{@user.email}."
       else
@@ -29,6 +29,8 @@ module Admin
     end
 
     def destroy
+      @user = User.find(params[:id])
+
       if @user == current_admin
         redirect_to admin_users_path, alert: "You cannot delete yourself."
       else
@@ -42,11 +44,7 @@ module Admin
     def set_user = @user = User.find(params[:id])
 
     def user_params
-      if action_name == "update"
-        params.require(:user).permit(:role)
-      else
-        params.require(:user).permit(:email, :password, :password_confirmation, :role)
-      end
+      params.require(:user).permit(:email, :password, :password_confirmation, :role)
     end
   end
 end
